@@ -45,11 +45,16 @@ int main()
             default:std::cout << "Invalid choice. Please try again." << std::endl;
                 break;
         }
+        std::cout << "Press enter to continue...";
+        std::string pause;
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::getline(std::cin, pause);
     } while (choice != 6);
 }
 
 int menu()
 {
+    system("clear");
     Color lights = {255, 255, 0};
     Color movie = {0, 68, 116};
     Color rent = {45, 200, 255};
@@ -78,14 +83,5 @@ int menu()
     std::cout << "║ " + RGB("Enter Choice:", input) + "                               ║" << std::endl;
     std::cout << "╚═════════════════════════════════════════════╝" << std::endl;
 
-    int choice;
-    std::cout << "1. Insert a New Movie" << std::endl;
-    std::cout << "2. Rent a Movie" << std::endl;
-    std::cout << "3. Return a Movie" << std::endl;
-    std::cout << "4. Show Movie Details" << std::endl;
-    std::cout << "5. Print Movie List" << std::endl;
-    std::cout << "6. Quit" << std::endl;
-    std::cout << "Enter your choice: ";
-    std::cin >> choice;
-    return choice;
+    return Prompt<int>("Enter Choice: ", {18, 38}, 43);
 }

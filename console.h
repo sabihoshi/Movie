@@ -170,3 +170,59 @@ void WriteLine(const std::string &string = "")
     LoadXY();
     MoveCursor(CursorDirection::Down);
 }
+
+void CinReset()
+{
+    std::cin.clear();
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+}
+
+COORD SetupInput(const std::string &prompt, const COORD position, const int length)
+{
+    CinReset();
+
+    XY(position);
+    std::cout << prompt << "~> ";
+
+    SaveXY();
+    SwapColors();
+    std::cout << Repeat(" ", length - (prompt.length() + 4));
+    LoadXY();
+
+    MoveCursor(CursorDirection::Right);
+    return {static_cast<short>(position.X + prompt.length() + 4), position.Y};
+}
+
+template<typename T>
+T Prompt(const std::string &prompt, const COORD position, const int length)
+{
+    while (true)
+    {
+        SetupInput(prompt, position, length);
+        T input;
+        std::cin >> input;
+
+        ResetColor();
+        if (!std::cin) continue;
+
+        XY(position.X, position.Y + 1);
+        return input;
+    }
+}
+
+template<>
+inline std::string Prompt<std::string>(const std::string &prompt, const COORD position, const int length)
+{
+    while (true)
+    {
+        SetupInput(prompt, position, length);
+        std::string input;
+        std::cin >> input;
+
+        ResetColor();
+        if (!std::cin) continue;
+
+        XY(position.X, position.Y + 1);
+        return input;
+    }
+}

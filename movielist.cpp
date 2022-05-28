@@ -93,13 +93,14 @@ void Blockbuster::addMovie()
     std::string code, title, genre;
 
     std::cout << "Enter the movie code: ";
-    std::cin >> code;
+    std::cin.ignore();
+    std::getline(std::cin, code);
 
     std::cout << "Enter the movie title: ";
-    std::cin >> title;
+    std::getline(std::cin, title);
 
     std::cout << "Enter the movie genre: ";
-    std::cin >> genre;
+    std::getline(std::cin, genre);
 
     std::cout << "Enter the movie year: ";
     std::cin >> year;
