@@ -1,7 +1,91 @@
 #include <iostream>
+#include "movielist.h"
+#include "console.h"
+
+int menu();
+
+// A new video store in your neighborhood is about to open. However, it does not have a program to keep track of its videos and customers.
+// The store managers want someone to write a program for their system so that the video store can operate.
+
+// Create a Blockbuster Class with the following components:
+// Movie Code
+// Movie Title
+// Movie Genre
+// Year Released
+// The program requires the following menu and processes:
+// There will be 5 Movie Information in the Linked List. This will be done in the constructor.
+// Insert a New Movie (insert operation)
+// Rent a Movie (delete operation)
+// Return a Movie (append operation)
+// Show Movie Details (traversal operation with match Movie Code)
+// Print Movie List (traversal operation)
+// Quit the Program (destructor)
 
 int main()
 {
-    std::cout << "Hello, World!" << std::endl;
-    return 0;
+    Blockbuster list;
+    int choice;
+    do
+    {
+        choice = menu();
+        switch (choice)
+        {
+            case 1:list.addMovie();
+                break;
+            case 2:list.rentMovie();
+                break;
+            case 3:list.returnMovie();
+                break;
+            case 4:list.showMovieDetails();
+                break;
+            case 5:list.printMovieList();
+                break;
+            case 6:list.~Blockbuster();
+                break;
+            default:std::cout << "Invalid choice. Please try again." << std::endl;
+                break;
+        }
+    } while (choice != 6);
+}
+
+int menu()
+{
+    Color lights = {255, 255, 0};
+    Color movie = {0, 68, 116};
+    Color rent = {45, 200, 255};
+    Color number = {255, 255, 0};
+    Color input = {146, 208, 80};
+    const std::string &light = RGB("•", lights);
+
+    std::cout << "╔═════════════════════════════════════════════╗" << std::endl;
+    std::cout << "║ " + RGB("• • • • • • • • • • • • • • • • • • • • • •", lights) + " ║" << std::endl;
+    std::cout << "║ " + light + RGB("╔═╗╔═╦═══╦╗──╔╦══╦═══╗", movie) + RGB("╔═══╦═══╦═╗─╔╦════╗", rent) + light + " ║" << std::endl;
+    std::cout << "║ " + light + RGB("║║╚╝║║╔═╗║╚╗╔╝╠╣╠╣╔══╝", movie) + RGB("║╔═╗║╔══╣║╚╗║║╔╗╔╗║", rent) + light + " ║" << std::endl;
+    std::cout << "║ " + light + RGB("║╔╗╔╗║║─║╠╗║║╔╝║║║╚══╗", movie) + RGB("║╚═╝║╚══╣╔╗╚╝╠╝║║╚╝", rent) + light + " ║" << std::endl;
+    std::cout << "║ " + light + RGB("║║║║║║║─║║║╚╝║─║║║╔══╝", movie) + RGB("║╔╗╔╣╔══╣║╚╗║║─║║  ", rent) + light + " ║" << std::endl;
+    std::cout << "║ " + light + RGB("║║║║║║╚═╝║╚╗╔╝╔╣╠╣╚══╗", movie) + RGB("║║║╚╣╚══╣║─║║║─║║  ", rent) + light + " ║" << std::endl;
+    std::cout << "║ " + light + RGB("╚╝╚╝╚╩═══╝─╚╝─╚══╩═══╝", movie) + RGB("╚╝╚═╩═══╩╝─╚═╝─╚╝  ", rent) + light + " ║" << std::endl;
+    std::cout << "║ " + RGB("• • • • • • • • • • • • • • • • • • • • • •", lights) + " ║" << std::endl;
+    std::cout << "║                                             ║" << std::endl;
+    std::cout << "║           [" + RGB("1", number) + "] Insert a Movie                ║" << std::endl;
+    std::cout << "║           [" + RGB("2", number) + "] Rent a Movie                  ║" << std::endl;
+    std::cout << "║           [" + RGB("3", number) + "] Return a Movie                ║" << std::endl;
+    std::cout << "║           [" + RGB("4", number) + "] Show Movie Details            ║" << std::endl;
+    std::cout << "║           [" + RGB("5", number) + "] Movie List                    ║" << std::endl;
+    std::cout << "║           [" + RGB("6", number) + "] Quit                          ║" << std::endl;
+    std::cout << "║                                             ║" << std::endl;
+    std::cout << "╠═════════════════════════════════════════════╣" << std::endl;
+    std::cout << "║ " + RGB("Enter Choice:", input) + "                               ║" << std::endl;
+    std::cout << "╚═════════════════════════════════════════════╝" << std::endl;
+
+    int choice;
+    std::cout << "1. Insert a New Movie" << std::endl;
+    std::cout << "2. Rent a Movie" << std::endl;
+    std::cout << "3. Return a Movie" << std::endl;
+    std::cout << "4. Show Movie Details" << std::endl;
+    std::cout << "5. Print Movie List" << std::endl;
+    std::cout << "6. Quit" << std::endl;
+    std::cout << "Enter your choice: ";
+    std::cin >> choice;
+    return choice;
 }
