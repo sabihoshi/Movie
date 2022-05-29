@@ -47,7 +47,6 @@ int main()
         }
         std::cout << "Press enter to continue...";
         std::string pause;
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         std::getline(std::cin, pause);
     } while (choice != 6);
 }
