@@ -29,6 +29,4 @@ public:
     void addMovie();
 
     ~Blockbuster();
-
-    Movie getMovie(const std::string &movieCode);
 };
