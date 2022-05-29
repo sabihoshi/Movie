@@ -30,7 +30,7 @@ public:
 
     void setYearReleased(int yearReleased);
 
-    void printMovieDetails();
+    void printMovieDetails(bool rented);
 
     bool operator==(const Movie &compare) const;
 };

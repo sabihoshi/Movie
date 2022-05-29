@@ -23,7 +23,8 @@ void printHeader()
     std::cout << std::setw(15) << "Movie Code"
               << std::setw(20) << "Movie Title"
               << std::setw(15) << "Movie Genre"
-              << std::setw(15) << "Year Released";
+              << std::setw(15) << "Year Released"
+              << std::setw(15) << "Is Rented";
     LoadXY();
     MoveCursor(CursorDirection::Down);
 }
@@ -78,7 +79,7 @@ void Blockbuster::showMovieDetails(const std::string &movieCode)
     {
         if (movie.getMovieCode() == movieCode)
         {
-            movie.printMovieDetails();
+            movie.printMovieDetails(false);
             return;
         }
     }
@@ -100,7 +101,11 @@ void Blockbuster::printMovieList()
     printHeader();
     for (auto &movie: movieStock)
     {
-        movie.printMovieDetails();
+        movie.printMovieDetails(false);
+    }
+    for (auto &movie: rentedMovies)
+    {
+        movie.printMovieDetails(true);
     }
 }
 

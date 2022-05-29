@@ -4,14 +4,15 @@
 #include <iomanip>
 #include <utility>
 
-void Movie::printMovieDetails()
+void Movie::printMovieDetails(bool rented)
 {
     SaveXY();
     std::cout << std::left;
     std::cout << std::setw(15) << getMovieCode()
               << std::setw(20) << getMovieTitle()
               << std::setw(15) << getMovieGenre()
-              << std::setw(15) << getYearReleased();
+              << std::setw(15) << getYearReleased()
+              << std::setw(15) << std::to_string(rented);
     LoadXY();
     MoveCursor(CursorDirection::Down);
 }
