@@ -141,4 +141,9 @@ void Blockbuster::insertMovie(const Movie &movie)
 Blockbuster::~Blockbuster()
 {
     movieStock.clear();
+    Box({7,1}, "EXIT", 3);
+    MoveCursor(CursorDirection::Down);
+    WriteLine(Center("T H A N K  Y O U !", 74));
+    MoveCursor(CursorDirection::Down);
+    std::cout << std::endl;
 }
