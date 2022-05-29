@@ -33,7 +33,7 @@ void Blockbuster::rentMovie(const std::string &movieCode)
 
 void Blockbuster::rentMovie()
 {
-    Box({20, 0});
+    Box({7, 1});
     std::string movieCode = Prompt<std::string>("Enter movie code: ");
     rentMovie(movieCode);
 }
@@ -55,7 +55,7 @@ void Blockbuster::returnMovie(const std::string &movieCode)
 
 void Blockbuster::returnMovie()
 {
-    Box({20, 0});
+    Box({7, 1});
     std::string movieCode = Prompt<std::string>("Enter movie code: ");
     returnMovie(movieCode);
 }
@@ -76,14 +76,14 @@ void Blockbuster::showMovieDetails(const std::string &movieCode)
 
 void Blockbuster::showMovieDetails()
 {
-    Box({20, 0});
+    Box({7, 1});
     std::string movieCode = Prompt<std::string>("Enter movie code: ");
     showMovieDetails(movieCode);
 }
 
 void Blockbuster::printMovieList()
 {
-    Box({20, 0}, 10);
+    Box({7, 1}, 10);
     SaveXY();
     std::cout << std::left;
     std::cout << std::setw(15) << "Movie Code"
@@ -100,7 +100,7 @@ void Blockbuster::printMovieList()
 
 void Blockbuster::addMovie()
 {
-    Box({20, 0});
+    Box({7, 1});
 
     std::string code = Prompt<std::string>("Enter the movie code");
     std::string title = Prompt<std::string>("Enter the movie title");
