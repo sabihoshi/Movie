@@ -84,6 +84,6 @@ int menu()
     WriteLine("║                                             ║");
     WriteLine("╚═════════════════════════════════════════════╝");
 
-    XY(23, 18);
+    XY(24, 19);
     return Prompt<int>(RGB("Enter choice", input));
 }
