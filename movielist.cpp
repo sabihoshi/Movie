@@ -84,7 +84,7 @@ void Blockbuster::showMovieDetails(const std::string &movieCode)
         }
     }
 
-    std::cout << "Movie not found" << std::endl;
+    WriteLine("Movie not found");
 }
 
 void Blockbuster::showMovieDetails()
