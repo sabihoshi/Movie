@@ -83,6 +83,7 @@ void Blockbuster::showMovieDetails(const std::string &movieCode)
     {
         if (movie.getMovieCode() == movieCode)
         {
+            printHeader();
             movie.printMovieDetails(false);
             return;
         }
@@ -95,7 +96,6 @@ void Blockbuster::showMovieDetails()
 {
     Box({7, 1}, "SHOW MOVIE DETAILS");
     std::string movieCode = Prompt<std::string>("Enter movie code: ");
-    printHeader();
     showMovieDetails(movieCode);
 }
 
