@@ -171,13 +171,10 @@ inline void WriteLine(const std::string &string = "")
     MoveCursor(CursorDirection::Down);
 }
 
-inline bool cin;
-
 inline void CinReset()
 {
     std::cin.clear();
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-    cin = false;
 }
 
 template<typename T>
@@ -189,7 +186,7 @@ inline T Prompt(const std::string &prompt)
         std::cout << prompt << "~> ";
         T input;
         std::cin >> input;
-        cin = true;
+        CinReset();
 
         ResetColor();
         if (!std::cin)
@@ -211,7 +208,6 @@ inline std::string Prompt<std::string>(const std::string &prompt)
     {
         SaveXY();
 
-        if (cin) CinReset();
         std::cout << prompt << "~> ";
         std::string input;
         std::getline(std::cin, input);
