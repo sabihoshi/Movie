@@ -41,7 +41,7 @@ int main()
             case 5:list.printMovieList();
                 break;
             case 6:list.~Blockbuster();
-                break;
+                return 0;
             default:std::cout << "Invalid choice. Please try again." << std::endl;
                 break;
         }
