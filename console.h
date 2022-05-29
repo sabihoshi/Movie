@@ -189,6 +189,7 @@ inline T Prompt(const std::string &prompt)
         std::cout << prompt << "~> ";
         T input;
         std::cin >> input;
+        cin = true;
 
         ResetColor();
         if (!std::cin)

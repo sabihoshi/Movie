@@ -90,6 +90,7 @@ void Blockbuster::printMovieList()
 
 void Box(COORD coord)
 {
+    system("clear");
     XY(coord);
     WriteLine("╔════════════════════════════════════════════════════════════════════════════╗");
     WriteLine("║                                                                            ║");
