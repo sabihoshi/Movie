@@ -16,6 +16,18 @@ void Box(COORD coord, int length = 4)
     XY(coord.X + 2, coord.Y + 1);
 }
 
+void printHeader()
+{
+    SaveXY();
+    std::cout << std::left;
+    std::cout << std::setw(15) << "Movie Code"
+              << std::setw(20) << "Movie Title"
+              << std::setw(15) << "Movie Genre"
+              << std::setw(15) << "Year Released";
+    LoadXY();
+    MoveCursor(CursorDirection::Down);
+}
+
 void Blockbuster::rentMovie(const std::string &movieCode)
 {
     for (auto &movie: movieStock)
@@ -78,20 +90,14 @@ void Blockbuster::showMovieDetails()
 {
     Box({7, 1});
     std::string movieCode = Prompt<std::string>("Enter movie code: ");
+    printHeader();
     showMovieDetails(movieCode);
 }
 
 void Blockbuster::printMovieList()
 {
     Box({7, 1}, 10);
-    SaveXY();
-    std::cout << std::left;
-    std::cout << std::setw(15) << "Movie Code"
-              << std::setw(20) << "Movie Title"
-              << std::setw(15) << "Movie Genre"
-              << std::setw(15) << "Year Released";
-    LoadXY();
-    MoveCursor(CursorDirection::Down);
+    printHeader();
     for (auto &movie: movieStock)
     {
         movie.printMovieDetails();

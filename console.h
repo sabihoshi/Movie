@@ -171,7 +171,7 @@ inline void WriteLine(const std::string &string = "")
     MoveCursor(CursorDirection::Down);
 }
 
-static bool cin;
+inline bool cin;
 
 inline void CinReset()
 {
