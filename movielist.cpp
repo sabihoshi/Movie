@@ -24,7 +24,7 @@ void printHeader()
               << std::setw(20) << "Movie Title"
               << std::setw(15) << "Movie Genre"
               << std::setw(15) << "Year Released"
-              << std::setw(15) << "Is Rented";
+              << std::setw(10) << "Is Rented";
     LoadXY();
     MoveCursor(CursorDirection::Down);
 }

@@ -12,7 +12,7 @@ void Movie::printMovieDetails(bool rented)
               << std::setw(20) << getMovieTitle()
               << std::setw(15) << getMovieGenre()
               << std::setw(15) << getYearReleased()
-              << std::setw(15) << std::to_string(rented);
+              << std::setw(10) << std::boolalpha << rented;
     LoadXY();
     MoveCursor(CursorDirection::Down);
 }
