@@ -186,15 +186,16 @@ inline T Prompt(const std::string &prompt)
         std::cout << prompt << "~> ";
         T input;
         std::cin >> input;
-        CinReset();
 
         ResetColor();
         if (!std::cin)
         {
             CinReset();
+            LoadXY();
             continue;
         }
 
+        CinReset();
         LoadXY();
         MoveCursor(CursorDirection::Down);
         return input;
