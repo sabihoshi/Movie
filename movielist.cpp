@@ -3,11 +3,15 @@
 #include <iostream>
 #include <iomanip>
 
-void Box(COORD coord, int length = 4)
+void Box(COORD coord, const std::string& title, int length = 4)
 {
     system("clear");
     XY(coord);
+    std::string strips = RGB("• • • • • • • • • • • • • •", {255, 255, 0});
     WriteLine("╔════════════════════════════════════════════════════════════════════════════╗");
+    WriteLine("║ " + strips + Center(title, 20) + strips + " ║");
+    WriteLine("╠════════════════════════════════════════════════════════════════════════════╣");
+
     for (int i = 0; i < length; ++i)
     {
         WriteLine("║                                                                            ║");
@@ -46,7 +50,7 @@ void Blockbuster::rentMovie(const std::string &movieCode)
 
 void Blockbuster::rentMovie()
 {
-    Box({7, 1});
+    Box({7, 1}, "RENT A MOVIE");
     std::string movieCode = Prompt<std::string>("Enter movie code: ");
     rentMovie(movieCode);
 }
@@ -68,7 +72,7 @@ void Blockbuster::returnMovie(const std::string &movieCode)
 
 void Blockbuster::returnMovie()
 {
-    Box({7, 1});
+    Box({7, 1}, "RETURN A MOVIE");
     std::string movieCode = Prompt<std::string>("Enter movie code: ");
     returnMovie(movieCode);
 }
@@ -89,7 +93,7 @@ void Blockbuster::showMovieDetails(const std::string &movieCode)
 
 void Blockbuster::showMovieDetails()
 {
-    Box({7, 1});
+    Box({7, 1}, "SHOW MOVIE DETAILS");
     std::string movieCode = Prompt<std::string>("Enter movie code: ");
     printHeader();
     showMovieDetails(movieCode);
@@ -97,7 +101,7 @@ void Blockbuster::showMovieDetails()
 
 void Blockbuster::printMovieList()
 {
-    Box({7, 1}, 10);
+    Box({7, 1}, "MOVIE LIST", 10);
     printHeader();
     for (auto &movie: movieStock)
     {
@@ -111,7 +115,7 @@ void Blockbuster::printMovieList()
 
 void Blockbuster::addMovie()
 {
-    Box({7, 1});
+    Box({7, 1}, "INSERT A MOVIE");
 
     std::string code = Prompt<std::string>("Enter the movie code");
     std::string title = Prompt<std::string>("Enter the movie title");
@@ -130,6 +134,3 @@ Blockbuster::~Blockbuster()
 {
     movieStock.clear();
 }
-
-
-
