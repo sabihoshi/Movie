@@ -1,16 +1,19 @@
 #include "movie.h"
+#include "console.h"
 #include <iostream>
 #include <iomanip>
 #include <utility>
 
 void Movie::printMovieDetails()
 {
+    SaveXY();
     std::cout << std::left;
     std::cout << std::setw(15) << getMovieCode()
               << std::setw(20) << getMovieTitle()
               << std::setw(15) << getMovieGenre()
-              << std::setw(15) << getYearReleased()
-              << std::endl;
+              << std::setw(15) << getYearReleased();
+    LoadXY();
+    MoveCursor(CursorDirection::Down);
 }
 
 Movie::Movie(std::string movieCode, std::string movieTitle,

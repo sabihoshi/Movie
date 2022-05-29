@@ -3,6 +3,19 @@
 #include <iostream>
 #include <iomanip>
 
+void Box(COORD coord, int length = 4)
+{
+    system("clear");
+    XY(coord);
+    WriteLine("╔════════════════════════════════════════════════════════════════════════════╗");
+    for (int i = 0; i < length; ++i)
+    {
+        WriteLine("║                                                                            ║");
+    }
+    WriteLine("╚════════════════════════════════════════════════════════════════════════════╝");
+    XY(coord.X + 2, coord.Y + 1);
+}
+
 void Blockbuster::rentMovie(const std::string &movieCode)
 {
     for (auto &movie: movieStock)
@@ -20,10 +33,8 @@ void Blockbuster::rentMovie(const std::string &movieCode)
 
 void Blockbuster::rentMovie()
 {
-    std::string movieCode;
-    std::cout << "Enter movie code: ";
-    std::cin >> movieCode;
-
+    Box({20, 0});
+    std::string movieCode = Prompt<std::string>("Enter movie code: ");
     rentMovie(movieCode);
 }
 
@@ -44,10 +55,8 @@ void Blockbuster::returnMovie(const std::string &movieCode)
 
 void Blockbuster::returnMovie()
 {
-    std::string movieCode;
-    std::cout << "Enter movie code: ";
-    std::cin >> movieCode;
-
+    Box({20, 0});
+    std::string movieCode = Prompt<std::string>("Enter movie code: ");
     returnMovie(movieCode);
 }
 
@@ -67,38 +76,26 @@ void Blockbuster::showMovieDetails(const std::string &movieCode)
 
 void Blockbuster::showMovieDetails()
 {
-    std::string movieCode;
-    std::cout << "Enter movie code: ";
-    std::cin >> movieCode;
-
+    Box({20, 0});
+    std::string movieCode = Prompt<std::string>("Enter movie code: ");
     showMovieDetails(movieCode);
 }
 
 void Blockbuster::printMovieList()
 {
+    Box({20, 0}, 10);
+    SaveXY();
     std::cout << std::left;
     std::cout << std::setw(15) << "Movie Code"
               << std::setw(20) << "Movie Title"
               << std::setw(15) << "Movie Genre"
-              << std::setw(15) << "Year Released"
-              << std::endl;
+              << std::setw(15) << "Year Released";
+    LoadXY();
+    MoveCursor(CursorDirection::Down);
     for (auto &movie: movieStock)
     {
         movie.printMovieDetails();
     }
-}
-
-void Box(COORD coord)
-{
-    system("clear");
-    XY(coord);
-    WriteLine("╔════════════════════════════════════════════════════════════════════════════╗");
-    WriteLine("║                                                                            ║");
-    WriteLine("║                                                                            ║");
-    WriteLine("║                                                                            ║");
-    WriteLine("║                                                                            ║");
-    WriteLine("╚════════════════════════════════════════════════════════════════════════════╝");
-    XY(coord.X + 2, coord.Y + 1);
 }
 
 void Blockbuster::addMovie()
