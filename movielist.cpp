@@ -37,11 +37,11 @@ void Blockbuster::rentMovie(const std::string &movieCode)
         {
             movieStock.remove(movie);
             rentedMovies.push_back(movie);
-            std::cout << "Movie rented successfully" << std::endl;
+            WriteLine("Movie rented successfully");
             return;
         }
     }
-    std::cout << "Movie not found or is already rented" << std::endl;
+    WriteLine("Movie not found or is already rented");
 }
 
 void Blockbuster::rentMovie()
@@ -59,11 +59,11 @@ void Blockbuster::returnMovie(const std::string &movieCode)
         {
             rentedMovies.remove(movie);
             movieStock.push_back(movie);
-            std::cout << "Movie returned successfully" << std::endl;
+            WriteLine("Movie returned successfully");
             return;
         }
     }
-    std::cout << "Movie not found or is not rented" << std::endl;
+    WriteLine("Movie not found or is not rented");
 }
 
 void Blockbuster::returnMovie()
