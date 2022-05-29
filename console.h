@@ -98,7 +98,7 @@ void ResetColor()
  */
 void XY(const COORD c)
 {
-    std::cout << "\033[" + std::to_string(c.Y) + ";" + std::to_string(c.X) + "H";
+    std::cout << "\033[" << c.Y << ";" << c.X << "f";
 }
 
 std::string Repeat(const std::string &string, const int repeats)
@@ -177,33 +177,21 @@ void CinReset()
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 }
 
-COORD SetupInput(const std::string &prompt, const COORD position, const int length)
-{
-    CinReset();
-
-    XY(position);
-    std::cout << prompt << "~> ";
-
-    SaveXY();
-    SwapColors();
-    std::cout << Repeat(" ", length - (prompt.length() + 4));
-    LoadXY();
-
-    MoveCursor(CursorDirection::Right);
-    return {static_cast<short>(position.X + prompt.length() + 4), position.Y};
-}
-
 template<typename T>
 T Prompt(const std::string &prompt, const COORD position, const int length)
 {
     while (true)
     {
-        SetupInput(prompt, position, length);
+        std::cout << prompt << "~> ";
         T input;
         std::cin >> input;
 
         ResetColor();
-        if (!std::cin) continue;
+        if (!std::cin)
+        {
+            CinReset();
+            continue;
+        }
 
         XY(position.X, position.Y + 1);
         return input;
@@ -215,12 +203,16 @@ inline std::string Prompt<std::string>(const std::string &prompt, const COORD po
 {
     while (true)
     {
-        SetupInput(prompt, position, length);
+        std::cout << prompt << "~> ";
         std::string input;
-        std::cin >> input;
+        std::getline(std::cin, input);
 
         ResetColor();
-        if (!std::cin) continue;
+        if (!std::cin)
+        {
+            CinReset();
+            continue;
+        }
 
         XY(position.X, position.Y + 1);
         return input;

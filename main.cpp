@@ -80,8 +80,8 @@ int menu()
     std::cout << "║           [" + RGB("6", number) + "] Quit                          ║" << std::endl;
     std::cout << "║                                             ║" << std::endl;
     std::cout << "╠═════════════════════════════════════════════╣" << std::endl;
-    std::cout << "║ " + RGB("Enter Choice:", input) + "                               ║" << std::endl;
+    std::cout << "║                                             ║" << std::endl;
     std::cout << "╚═════════════════════════════════════════════╝" << std::endl;
 
-    return Prompt<int>("Enter Choice: ", {18, 38}, 43);
+    return Prompt<int>(RGB("Enter Choice", input) + ": ", {5, 5}, 43);
 }
