@@ -4,19 +4,6 @@
 #include <iostream>
 #include <list>
 
-// Create a Blockbuster Class with the following components:
-// Movie Code
-// Movie Title
-// Movie Genre
-// Year Released
-
-// Insert a New Movie (insert operation)
-// Rent a Movie (delete operation)
-// Return a Movie (append operation)
-// Show Movie Details (traversal operation with match Movie Code)
-// Print Movie List (traversal operation)
-// Quit the Program (destructor)
-
 class Movie
 {
 private:

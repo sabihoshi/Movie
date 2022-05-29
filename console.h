@@ -37,7 +37,7 @@ const std::string COLOR_RESET = "\033[0m";
  * \param type Specify whether to change the foreground or the background color.
  * \return The encoded string with color.
  */
-std::string ChangeColor(const Color color, const GroundType type = GroundType::Fore)
+inline std::string ChangeColor(const Color color, const GroundType type = GroundType::Fore)
 {
     if (color.R == -1 && color.G == -1 && color.B == -1)
         return COLOR_RESET;
@@ -60,7 +60,7 @@ std::string ChangeColor(const Color color, const GroundType type = GroundType::F
  * \param type Specify whether to change the foreground or the background color.
  * \return The text you provided with the coloring you provided.
  */
-std::string RGB(const std::string &string, const Color color, const GroundType type = GroundType::Fore)
+inline std::string RGB(const std::string &string, const Color color, const GroundType type = GroundType::Fore)
 {
     return ChangeColor(color, type) + string + COLOR_RESET;
 }
@@ -68,7 +68,7 @@ std::string RGB(const std::string &string, const Color color, const GroundType t
 /**
  * \brief Swaps the colors of the foreground and background around.
  */
-void SwapColors()
+inline void SwapColors()
 {
     std::cout << "\033[7m";
 }
@@ -78,7 +78,7 @@ void SwapColors()
  * \param color The Color to use.
  * \param type Specify whether to change the foreground or the background color.
  */
-void SetColor(const Color color, const GroundType type = GroundType::Fore)
+inline void SetColor(const Color color, const GroundType type = GroundType::Fore)
 {
     std::cout << ChangeColor(color, type);
 }
@@ -86,7 +86,7 @@ void SetColor(const Color color, const GroundType type = GroundType::Fore)
 /**
  * \brief Resets the color back to the console defaults.
  */
-void ResetColor()
+inline void ResetColor()
 {
     std::cout << COLOR_RESET;
 }
@@ -96,12 +96,12 @@ void ResetColor()
  * \param c The coordinate you want to set the cursor to.
  * \return The new coordinates.
  */
-void XY(const COORD c)
+inline void XY(const COORD c)
 {
     std::cout << "\033[" << c.Y << ";" << c.X << "f";
 }
 
-std::string Repeat(const std::string &string, const int repeats)
+inline std::string Repeat(const std::string &string, const int repeats)
 {
     std::ostringstream repeated;
     const auto iterator = std::ostream_iterator<std::string>(repeated);
@@ -109,46 +109,46 @@ std::string Repeat(const std::string &string, const int repeats)
     return repeated.str();
 }
 
-std::string Repeat(const char character, const int repeats)
+inline std::string Repeat(const char character, const int repeats)
 {
     return Repeat(std::to_string(character), repeats);
 }
 
-std::string Center(const std::string &string, const int length)
+inline std::string Center(const std::string &string, const int length)
 {
     const int left = length / 2 - string.length() / 2;
     const int right = length - left - string.length();
     return Repeat(" ", left) + string + Repeat(" ", right);
 }
 
-std::string Right(const std::string &string, const int length)
+inline std::string Right(const std::string &string, const int length)
 {
     const int repeat = length - string.length();
     return string + Repeat(" ", repeat);
 }
 
-std::string Left(const std::string &string, const int length)
+inline std::string Left(const std::string &string, const int length)
 {
     const int repeat = length - string.length();
     return Repeat(" ", repeat) + string;
 }
 
-void XY(const int x, const int y)
+inline void XY(const int x, const int y)
 {
     return XY({x, y});
 }
 
-void SaveXY()
+inline void SaveXY()
 {
     std::cout << "\033[s";
 }
 
-void LoadXY()
+inline void LoadXY()
 {
     std::cout << "\033[u";
 }
 
-void MoveCursor(const CursorDirection direction, const short amount = 1)
+inline void MoveCursor(const CursorDirection direction, const short amount = 1)
 {
     switch (direction)
     {
@@ -163,7 +163,7 @@ void MoveCursor(const CursorDirection direction, const short amount = 1)
     }
 }
 
-void WriteLine(const std::string &string = "")
+inline void WriteLine(const std::string &string = "")
 {
     SaveXY();
     std::cout << string;
@@ -171,17 +171,21 @@ void WriteLine(const std::string &string = "")
     MoveCursor(CursorDirection::Down);
 }
 
-void CinReset()
+static bool cin;
+
+inline void CinReset()
 {
     std::cin.clear();
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    cin = false;
 }
 
 template<typename T>
-T Prompt(const std::string &prompt, const COORD position, const int length)
+inline T Prompt(const std::string &prompt)
 {
     while (true)
     {
+        SaveXY();
         std::cout << prompt << "~> ";
         T input;
         std::cin >> input;
@@ -193,16 +197,20 @@ T Prompt(const std::string &prompt, const COORD position, const int length)
             continue;
         }
 
-        XY(position.X, position.Y + 1);
+        LoadXY();
+        MoveCursor(CursorDirection::Down);
         return input;
     }
 }
 
 template<>
-inline std::string Prompt<std::string>(const std::string &prompt, const COORD position, const int length)
+inline std::string Prompt<std::string>(const std::string &prompt)
 {
     while (true)
     {
+        SaveXY();
+
+        if (cin) CinReset();
         std::cout << prompt << "~> ";
         std::string input;
         std::getline(std::cin, input);
@@ -214,7 +222,8 @@ inline std::string Prompt<std::string>(const std::string &prompt, const COORD po
             continue;
         }
 
-        XY(position.X, position.Y + 1);
+        LoadXY();
+        MoveCursor(CursorDirection::Down);
         return input;
     }
 }

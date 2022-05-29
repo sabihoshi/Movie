@@ -1,4 +1,5 @@
 #include "movielist.h"
+#include "console.h"
 #include <iostream>
 #include <iomanip>
 
@@ -87,24 +88,26 @@ void Blockbuster::printMovieList()
     }
 }
 
+void Box(COORD coord)
+{
+    XY(coord);
+    WriteLine("╔════════════════════════════════════════════════════════════════════════════╗");
+    WriteLine("║                                                                            ║");
+    WriteLine("║                                                                            ║");
+    WriteLine("║                                                                            ║");
+    WriteLine("║                                                                            ║");
+    WriteLine("╚════════════════════════════════════════════════════════════════════════════╝");
+    XY(coord.X + 2, coord.Y + 1);
+}
+
 void Blockbuster::addMovie()
 {
-    int year;
-    std::string code, title, genre;
+    Box({20, 0});
 
-    std::cout << "Enter the movie code: ";
-    std::cin.ignore();
-    std::getline(std::cin, code);
-
-    std::cout << "Enter the movie title: ";
-    std::getline(std::cin, title);
-
-    std::cout << "Enter the movie genre: ";
-    std::getline(std::cin, genre);
-
-    std::cout << "Enter the movie year: ";
-    std::cin >> year;
-
+    std::string code = Prompt<std::string>("Enter the movie code");
+    std::string title = Prompt<std::string>("Enter the movie title");
+    std::string genre = Prompt<std::string>("Enter the movie genre");
+    int year = Prompt<int>("Enter the movie year");
     Movie movie(code, title, genre, year);
     insertMovie(movie);
 }
