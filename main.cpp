@@ -62,7 +62,7 @@ int menu()
     Color input = {146, 208, 80};
     const std::string &light = RGB("•", lights);
 
-    XY(0, 23);
+    XY(23, 0);
     WriteLine("╔═════════════════════════════════════════════╗");
     WriteLine("║ " + RGB("• • • • • • • • • • • • • • • • • • • • • •", lights) + " ║");
     WriteLine("║ " + light + RGB("╔═╗╔═╦═══╦╗──╔╦══╦═══╗", movie) + RGB("╔═══╦═══╦═╗─╔╦════╗", rent) + light + " ║");
