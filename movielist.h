@@ -29,4 +29,8 @@ public:
     void addMovie();
 
     ~Blockbuster();
+
+    void Load();
+
+    void Save();
 };

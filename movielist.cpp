@@ -1,9 +1,12 @@
 #include "movielist.h"
+#include "movie.h"
 #include "console.h"
 #include <iostream>
 #include <iomanip>
+#include <fstream>
+#include <vector>
 
-void Box(COORD coord, const std::string& title, int length = 4)
+void Box(COORD coord, const std::string &title, int length = 4)
 {
     system("clear");
     XY(coord);
@@ -141,9 +144,48 @@ void Blockbuster::insertMovie(const Movie &movie)
 Blockbuster::~Blockbuster()
 {
     movieStock.clear();
-    Box({7,1}, "EXIT", 3);
+    Box({7, 1}, "EXIT", 3);
     MoveCursor(CursorDirection::Down);
     WriteLine(Center("T H A N K  Y O U !", 74));
     MoveCursor(CursorDirection::Down);
     std::cout << std::endl;
+}
+
+void Blockbuster::Load()
+{
+    std::ifstream stock("stock.json");
+    std::ifstream rented("rented.json");
+    try
+    {
+        nlohmann::json stockJson;
+        nlohmann::json rentedJson;
+
+        stock >> stockJson;
+        rented >> rentedJson;
+
+        movieStock = stockJson.get<std::list<Movie>>();
+        rentedMovies = rentedJson.get<std::list<Movie>>();
+
+        stock.close();
+        rented.close();
+    }
+    catch (nlohmann::detail::parse_error &p)
+    {
+        std::cerr << "Failed to open file at byte " << p.byte << std::endl;
+        std::cerr << "No movies were loaded." << std::endl;
+    }
+}
+
+void Blockbuster::Save()
+{
+    std::ofstream stock("stock.json");
+    std::ofstream rented("rented.json");
+    nlohmann::json stockJson = movieStock;
+    nlohmann::json rentedJson = rentedMovies;
+
+    stock << stockJson.dump(4);
+    rented << rentedJson.dump(4);
+
+    stock.close();
+    rented.close();
 }

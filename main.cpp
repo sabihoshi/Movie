@@ -7,6 +7,7 @@ int menu();
 int main()
 {
     Blockbuster list;
+    list.Load();
     int choice;
     do
     {
@@ -23,7 +24,8 @@ int main()
                 break;
             case 5:list.printMovieList();
                 break;
-            case 6:list.~Blockbuster();
+            case 6:list.Save();
+                list.~Blockbuster();
                 return 0;
             default:std::cout << "Invalid choice. Please try again." << std::endl;
                 break;
