@@ -88,7 +88,15 @@ void Blockbuster::showMovieDetails(const std::string &movieCode)
             return;
         }
     }
-
+    for (Movie &movie: rentedMovies)
+    {
+        if (movie.getMovieCode() == movieCode)
+        {
+            printHeader();
+            movie.printMovieDetails(true);
+            return;
+        }
+    }
     WriteLine("Movie not found");
 }
 
