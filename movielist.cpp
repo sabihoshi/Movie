@@ -17,7 +17,7 @@ void Box(COORD coord, const std::string& title, int length = 4)
         WriteLine("║                                                                            ║");
     }
     WriteLine("╚════════════════════════════════════════════════════════════════════════════╝");
-    XY(coord.X + 2, coord.Y + 1);
+    XY(coord.X + 2, coord.Y + 3);
 }
 
 void printHeader()
