@@ -190,8 +190,10 @@ inline T Prompt(const std::string &prompt)
         ResetColor();
         if (!std::cin)
         {
-            CinReset();
             LoadXY();
+            std::cout << Repeat(" ", 15 + prompt.length() + 3);
+            LoadXY();
+            CinReset();
             continue;
         }
 
@@ -216,6 +218,9 @@ inline std::string Prompt<std::string>(const std::string &prompt)
         ResetColor();
         if (!std::cin)
         {
+            LoadXY();
+            std::cout << Repeat(" ", 15 + prompt.length() + 3);
+            LoadXY();
             CinReset();
             continue;
         }
