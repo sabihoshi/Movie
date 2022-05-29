@@ -4,23 +4,6 @@
 
 int menu();
 
-// A new video store in your neighborhood is about to open. However, it does not have a program to keep track of its videos and customers.
-// The store managers want someone to write a program for their system so that the video store can operate.
-
-// Create a Blockbuster Class with the following components:
-// Movie Code
-// Movie Title
-// Movie Genre
-// Year Released
-// The program requires the following menu and processes:
-// There will be 5 Movie Information in the Linked List. This will be done in the constructor.
-// Insert a New Movie (insert operation)
-// Rent a Movie (delete operation)
-// Return a Movie (append operation)
-// Show Movie Details (traversal operation with match Movie Code)
-// Print Movie List (traversal operation)
-// Quit the Program (destructor)
-
 int main()
 {
     Blockbuster list;
