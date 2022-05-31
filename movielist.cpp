@@ -113,7 +113,7 @@ void Blockbuster::showMovieDetails()
 void Blockbuster::printMovieList()
 {
     int length = movieStock.size() + rentedMovies.size();
-    Box({7, 1}, "MOVIE LIST", length);
+    Box({7, 1}, "MOVIE LIST", length + 1);
     printHeader();
     for (auto &movie: movieStock)
     {
