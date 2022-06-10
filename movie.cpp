@@ -17,6 +17,13 @@ void Movie::printMovieDetails(bool rented)
     MoveCursor(CursorDirection::Down);
 }
 
+void Movie::printRentedMovieDetails()
+{
+  std::cout << std::left;
+  std::cout << std::setw(15) << getMovieCode()
+            << std::setw(20) << getMovieTitle();
+}
+
 Movie::Movie(std::string movieCode, std::string movieTitle,
              std::string movieGenre, int yearReleased) :
     _movieCode(std::move(movieCode)), _movieTitle(std::move(movieTitle)),
