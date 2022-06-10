@@ -127,13 +127,16 @@ void Blockbuster::printMovieList()
 
 void Blockbuster::addMovie()
 {
-    Box({7, 1}, "INSERT A MOVIE");
+    Box({7, 1}, "INSERT A MOVIE", 7);
 
     std::string code = Prompt<std::string>("Enter the movie code");
     std::string title = Prompt<std::string>("Enter the movie title");
     std::string genre = Prompt<std::string>("Enter the movie genre");
     int year = Prompt<int>("Enter the movie year");
-    Movie movie(code, title, genre, year);
+    std::string production = Prompt<std::string>("Enter the movie production");
+    int copies = Prompt<int>("Enter number of copies");
+    std::string image = Prompt<std::string>("Enter the movie image filename");
+    Movie movie(code, title, genre, production, copies,year, image, true);
     insertMovie(movie);
 }
 

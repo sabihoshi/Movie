@@ -24,10 +24,10 @@ void Movie::printRentedMovieDetails()
             << std::setw(20) << getMovieTitle();
 }
 
-Movie::Movie(std::string movieCode, std::string movieTitle,
-             std::string movieGenre, int yearReleased) :
-    _movieCode(std::move(movieCode)), _movieTitle(std::move(movieTitle)),
-    _movieGenre(std::move(movieGenre)), _yearReleased(yearReleased)
+Movie::Movie(std::string movieCode, std::string movieTitle, std::string movieGenre,std::string movieProduction,
+             int movieCopies, int yearReleased, std::string movieImageFilename, bool movieAvailability):
+    _movieCode(std::move(movieCode)), _movieTitle(std::move(movieTitle)),_movieGenre(std::move(movieGenre)), _movieProduction(std::move(movieProduction)),
+    _movieCopies(movieCopies), _yearReleased(yearReleased), _movieImageFilename(std::move(movieImageFilename)), _movieAvailability(movieAvailability)
 {
 }
 
@@ -46,9 +46,29 @@ std::string Movie::getMovieGenre()
     return _movieGenre;
 }
 
+std::string Movie::getMovieProduction()
+{
+    return _movieProduction;
+}
+
+int Movie::getMovieCopies()
+{
+    return _movieCopies;
+}
+
 int Movie::getYearReleased() const
 {
-    return _yearReleased;
+  return _yearReleased;
+}
+
+std::string Movie::getMovieImageFilename()
+{
+    return _movieImageFilename;
+}
+
+bool Movie::getMovieAvailability()
+{
+    return _movieAvailability;
 }
 
 void Movie::setMovieCode(std::string &movieCode)
@@ -66,9 +86,29 @@ void Movie::setMovieGenre(std::string &movieGenre)
     _movieGenre = std::move(movieGenre);
 }
 
+void Movie::setMovieProduction(std::string &movieProduction)
+{
+    _movieProduction = std::move(movieProduction);
+}
+
+void Movie::setMovieCopies(int movieCopies)
+{
+    _movieCopies = movieCopies;
+}
+
 void Movie::setYearReleased(int yearReleased)
 {
     _yearReleased = yearReleased;
+}
+
+void Movie::setMovieImageFilename(std::string &movieImageFilename)
+{
+    _movieImageFilename = std::move(movieImageFilename);
+}
+
+void Movie::setMovieAvailability(bool &movieAvailability)
+{
+    _movieAvailability = movieAvailability;
 }
 
 bool Movie::operator==(const Movie &compare) const
